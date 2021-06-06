@@ -4,13 +4,14 @@
 // License, Contributing, Tests, and Questions DONE
 // WHEN - enter project title DONE THEN displayed as the title of the README DONE
 // WHEN - enter description, installation instructions, usage information, contribution guidelines, and test instructions DONE
-// ####1 THEN - information added to README called Description,Installation, Usage, Contributing, and Tests
+// THEN - information added to README called Description,Installation, Usage, Contributing, and Tests DONE
 // WHEN - choose a license from a list of options DONE
-// ####2 THEN - badge for that license added near the top of README and notice is added to README entitled License 
+// ####1 THEN - badge for that license added near the top of README and notice is added to README entitled License 
 // that explains which license the application is covered under
-// WHEN - enter my GitHub username DONE ####3 THEN added to README entitled Questions, with a link to my GitHub profile
-// WHEN - enter my email address DONE ####4 THEN added to README entitled Questions, with instructions to reach me with additional questions
+// WHEN - enter my GitHub username DONE THEN added to README entitled Questions, with a link to my GitHub profile DONE
+// WHEN - enter my email address DONE THEN added to README entitled Questions, with instructions to reach me with additional questions DONE
 // WHEN - click on the links in the Table of Contents DONE THEN taken to the corresponding section of the README DONE
+// ####2 Clean up code through modules
 
 
 
@@ -33,7 +34,7 @@ const questions = [
     {
         type: "input",
         message: "What are the installation instructions?",
-        name: "instructions"
+        name: "installation"
     },
     {
         type: "input",
@@ -73,7 +74,36 @@ const questions = [
     }
 ];
 
-const readmeSetup = `## Table of Contents
+// const readmeSetup = `## Table of Contents
+
+// - [Description](#Description)
+// - [Installation](#Installation)
+// - [Usage](#Usage)
+// - [License](#License)
+// - [Contributing](#Contributing)
+// - [Tests](#Tests)
+// - [Questions](#Questions)
+
+// ### Description
+// ### Installation
+// ### Usage
+// ### License
+// ### Contributing
+// ### Tests
+// ### Questions
+// `;
+
+// TODO: Create a function to write README file
+function writeToFile(fileName, data) {
+    inquirer
+        .prompt(questions)
+        .then((response) => {
+            // fs.writeFile('README.md', readmeSetup, (err) => err ? console.error(err) : console.log('Commit logged!'));
+            // fs.writeFile('README.md', `# ${response.title}`, (err) => err ? console.error(err) : console.log('Commit logged!'));
+            // fs.writeFile('README.md', `${response.github}: https://github.com/${response.github}`, (err) => err ? console.error(err) : console.log('Commit logged!'));
+            // fs.writeFile('README.md', `${response.email}: Please contact me through this E-mail address with any further questions that you may have.`, (err) => err ? console.error(err) : console.log('Commit logged!'));
+            fs.writeFile('README.md', `# ${response.title}
+## Table of Contents
 
 - [Description](#Description)
 - [Installation](#Installation)
@@ -84,23 +114,23 @@ const readmeSetup = `## Table of Contents
 - [Questions](#Questions)
 
 ### Description
+${response.description}
 ### Installation
+${response.installation}
 ### Usage
+${response.usage}
 ### License
+${response.license}
 ### Contributing
+${response.contribution}
 ### Tests
+${response.test}
 ### Questions
-`;
+${response.github}: https://github.com/${response.github}
 
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {
-    inquirer
-    .prompt(questions)
-    .then((response) => {
-        fs.writeFile('README.md', readmeSetup, (err) => err ? console.error(err) : console.log('Commit logged!'));
-        fs.writeFile('README.md', `# ${response.title}`, (err) => err ? console.error(err) : console.log('Commit logged!'));
-
-    });
+${response.email}: Please contact me through this E-mail address with any further questions that you may have.
+            `, (err) => err ? console.error(err) : console.log('Commit logged!'));
+        });
 }
 // TODO: Create a function to initialize app
 function init() {
