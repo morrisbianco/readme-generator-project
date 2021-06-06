@@ -1,27 +1,25 @@
-// GIVEN - application that accepts user input
-// WHEN - prompted for information about my application repository
-// THEN - README.md is generated with title and sections Description, Table of Contents, Installation, Usage, 
-// License, Contributing, Tests, and Questions
-// WHEN - enter project title THEN displayed as the title of the README
-// WHEN - enter description, installation instructions, usage information, contribution guidelines, and test instructions
-// THEN - information added to README called Description,Installation, Usage, Contributing, and Tests
-// WHEN - choose a license from a list of options
-// THEN - badge for that license added near the top of README and notice is added to README entitled License 
+// GIVEN - application that accepts user input DONE
+// WHEN - prompted for information about my application repository DONE
+// THEN - README.md is generated with title and sections Description, Table of Contents, Installation, Usage, DONE
+// License, Contributing, Tests, and Questions DONE
+// WHEN - enter project title DONE THEN displayed as the title of the README DONE
+// WHEN - enter description, installation instructions, usage information, contribution guidelines, and test instructions DONE
+// ####1 THEN - information added to README called Description,Installation, Usage, Contributing, and Tests
+// WHEN - choose a license from a list of options DONE
+// ####2 THEN - badge for that license added near the top of README and notice is added to README entitled License 
 // that explains which license the application is covered under
-// WHEN - enter my GitHub username THEN added to README entitled Questions, with a link to my GitHub profile
-// WHEN - enter my email address THEN added to README entitled Questions, with instructions to reach me with additional questions
-// WHEN - click on the links in the Table of Contents THEN taken to the corresponding section of the README
+// WHEN - enter my GitHub username DONE ####3 THEN added to README entitled Questions, with a link to my GitHub profile
+// WHEN - enter my email address DONE ####4 THEN added to README entitled Questions, with instructions to reach me with additional questions
+// WHEN - click on the links in the Table of Contents DONE THEN taken to the corresponding section of the README DONE
 
 
 
 // TODO: Include packages needed for this application
+const fs = require('fs');
 const inquirer = require('inquirer');
-const Choices = require('inquirer/lib/objects/choices');
 
 // TODO: Create an array of questions for user input
 const questions = [
-    inquirer
-        .prompt([
     {
         type: "input",
         message: "What would you like the project title to be?",
@@ -61,7 +59,7 @@ const questions = [
             { name: 'Apache 2.0 License', value: 'Apache 2.0 License' },
             { name: 'GNU GPL v3', value: 'GNU GPL v3' },
             { name: 'Eclipse Public License 1.0', value: 'Eclipse Public License 1.0' }
-          ],
+        ],
     },
     {
         type: "input",
@@ -73,15 +71,41 @@ const questions = [
         message: "What is your E-mail address?",
         name: "email"
     }
-        ])
-        .then()
 ];
 
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+const readmeSetup = `## Table of Contents
 
+- [Description](#Description)
+- [Installation](#Installation)
+- [Usage](#Usage)
+- [License](#License)
+- [Contributing](#Contributing)
+- [Tests](#Tests)
+- [Questions](#Questions)
+
+### Description
+### Installation
+### Usage
+### License
+### Contributing
+### Tests
+### Questions
+`;
+
+// TODO: Create a function to write README file
+function writeToFile(fileName, data) {
+    inquirer
+    .prompt(questions)
+    .then((response) => {
+        fs.writeFile('README.md', readmeSetup, (err) => err ? console.error(err) : console.log('Commit logged!'));
+        fs.writeFile('README.md', `# ${response.title}`, (err) => err ? console.error(err) : console.log('Commit logged!'));
+
+    });
+}
 // TODO: Create a function to initialize app
-function init() {}
+function init() {
+    writeToFile();
+}
 
 // Function call to initialize app
 init();
