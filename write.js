@@ -20,7 +20,7 @@ ${response.installation}
 ### Usage
 ${response.usage}
 ### License
-${response.license}
+This application uses the ${response.license} license.
 ### Contributing
 ${response.contribution}
 ### Tests

@@ -9,7 +9,7 @@ function init() {
     inquirer
         .prompt(questionsJS.questions)
         .then((response) => {
-            fs.writeFile('README.md', writeJS.writeFile(response), (err) => err ? console.error(err) : console.log('Commit logged!'));
+            fs.writeFile('testREADME.md', writeJS.writeFile(response), (err) => err ? console.error(err) : console.log('Commit logged!'));
         })
 }
 
